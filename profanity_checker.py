@@ -456,19 +456,20 @@ def profanity_checker(sentence):
 	sentence_list = sentence.split(" ")
 
 	for word in sentence_list:
-		if word in profane_words:
-			sentence_list = [new_word.replace(word, check_adverb(word)) for new_word in sentence_list]
+		temp_word = remove_punctuation(word)
+		if temp_word in profane_words:
+			sentence_list = [new_word.replace(temp_word, check_adverb(temp_word)) for new_word in sentence_list]
 
 	for word in sentence_list:
 		new_sentence += word + " "
 	print(new_sentence)
 
 def check_adverb(word):
-	if remove_punctuation(word).endswith == "er":
+	if word.endswith == "er":
 		return "squancher"
-	elif remove_punctuation(word).endswith("est"):
+	elif word.endswith("est"):
 		return "squanchiest"
-	elif remove_punctuation(word).endswith("ing") or remove_punctuation(word).endswith("ity"):
+	elif word.endswith("ing") or remove_punctuation(word).endswith("ity"):
 		return "squanching"
 	else:
 		return "squanch"
@@ -479,8 +480,8 @@ def remove_punctuation(punc):
 	return "".join(c for c in punc if c not in punctuation)
 
 def main():
-	print("Let's check for bad words")
-	user_input = raw_input("Enter the profane sentence: ")
+	print("Let's squanch things up a bit :D")
+	user_input = raw_input("Enter your profane word/sentence: ")
 	profanity_checker(user_input)
 
 main()
